@@ -21,6 +21,7 @@
 #define CONFIGLINE_MAX  1024
 
 struct configObject {
+    char  *host;
     int   port;
     int   daemon;
     int   http_timeout;

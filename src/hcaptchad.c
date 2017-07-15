@@ -544,9 +544,10 @@ int main(int argc, char **argv)
     //
     struct evhttp *httpd;
     event_init();
-    httpd = evhttp_start("0.0.0.0", cfg.port);
+    httpd = evhttp_start(cfg.host, cfg.port);
     if (httpd == NULL) {
-        fprintf(stderr, "Error: Unable to listen on 0.0.0.0:%d\n\n", cfg.port);
+        fprintf(stderr, "Error: Unable to listen on %s:%d\n\n", cfg.host,
+                cfg.port);
         exit(1);
     }
     fprintf(stderr, "\nStart %s [OK]\n\n", HCS_SIGNATURE);

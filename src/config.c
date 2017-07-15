@@ -3,6 +3,7 @@
 
 void initConfig()
 {
+    cfg.host    = "0.0.0.0";
     cfg.port    = 9527;
     cfg.daemon  = 0;
     cfg.pidfile = "/tmp/hcaptcha.pid";
@@ -69,6 +70,8 @@ void loadConfig(char *filename)
         /* Execute config directives */
         if (!strcasecmp(argv[0],"http_timeout") && argc == 2) {
             cfg.http_timeout = atoi(argv[1]);
+        } else if (!strcasecmp(argv[0],"host") && argc == 2) {
+            cfg.host = strdup(argv[1]);
         } else if (!strcasecmp(argv[0],"port") && argc == 2) {
             cfg.port = atoi(argv[1]);
         } else if (!strcasecmp(argv[0],"daemonize") && argc == 2) {
