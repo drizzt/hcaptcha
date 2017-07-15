@@ -201,7 +201,8 @@ char * data_build(char *key, size_t *imosize)
         x += fts[j].x - shift;
         word[i] = fts[j].c;
     }
-    
+    word[i] = '\0';
+
     int center = x/2;
 
     // periods
@@ -282,7 +283,7 @@ char * data_build(char *key, size_t *imosize)
     
     // Save Key-Word
     char key2[100];
-    sprintf(key2, "%s1", key);
+    snprintf(key2, sizeof(key2), "%s1", key);
     rc = memcached_set(memc, key2, strlen(key2), word, strlen(word), cfg.img_timeout, 0);
     if (rc != MEMCACHED_SUCCESS) {
         //fprintf(stderr, "hash: memcache error %s\n", memcached_strerror(memc, rc));
@@ -325,7 +326,7 @@ int data_del(char *k)
         return 1;
     
     char k2[100];
-    sprintf(k2, "%s1", k);
+    snprintf(k2, sizeof(k2), "%s1", k);
     
     //time_t expiration = 0;
     memcached_return rc = memcached_delete_by_key(memc, k, strlen(k), k, strlen(k), 0);
@@ -364,7 +365,7 @@ int data_check(char *k, char *v)
         return 1;
     
     char k2[100];
-    sprintf(k2, "%s1", k);
+    snprintf(k2, sizeof(k2), "%s1", k);
     
     memcached_return rc;
     size_t ims;
