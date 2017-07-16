@@ -418,15 +418,12 @@ void http_service_handler(struct evhttp_request *req, void *arg)
     char *action = strtok(NULL, "/");
     if (strcasecmp(action, "image") == 0) {
         
-        if (data_exists(token) == 0) {
-            
-            if (opt != NULL && strcasecmp(opt, "refresh") == 0)
-                im = data_build(token, &ims);
-            else
-                im = data_get(token, &ims);
-            
-        } else
+        if ((im = data_get(token, &ims)) == NULL || (opt != NULL &&
+            strcasecmp(opt, "refresh") == 0)) {
+
+            free(im);
             im = data_build(token, &ims);
+        }
         
         if (im == NULL) {
             status = -1;
