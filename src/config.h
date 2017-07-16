@@ -27,6 +27,7 @@ struct configObject {
     int   http_timeout;
     char  *symbols;
     char  *servers;
+    int   binary;
     int   img_width;
     int   img_height;
     int   len;

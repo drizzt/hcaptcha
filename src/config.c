@@ -11,6 +11,7 @@ void initConfig()
     cfg.http_timeout = 3;
     
     cfg.servers = "127.0.0.1:11211";  
+    cfg.binary = 1;
     
     cfg.img_width  = 120;
     cfg.img_height = 60;
@@ -80,6 +81,9 @@ void loadConfig(char *filename)
             cfg.pidfile = strdup(argv[1]);
         } else if (!strcasecmp(argv[0],"servers") && argc == 2) {
             cfg.servers = strdup(argv[1]);
+        } else if (!strcasecmp(argv[0],"binary") && argc == 2) {
+            if (!strcasecmp(argv[1],"yes")) cfg.binary = 1;
+            else if (!strcasecmp(argv[1],"no")) cfg.binary = 0;
         } else if (!strcasecmp(argv[0],"font") && argc == 2) {
             cfg.font = strdup(argv[1]);
         } else if (!strcasecmp(argv[0],"symbols") && argc == 2) {

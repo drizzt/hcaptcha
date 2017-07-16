@@ -66,7 +66,9 @@ void storage_setup_memcached()
     servers = memcached_servers_parse(cfg.servers);
     memcached_server_push(memc, servers);
     memcached_server_list_free(servers);
-    //memcached_behavior_set(memc, MEMCACHED_BEHAVIOR_BINARY_PROTOCOL, 0);
+    if (cfg.binary) {
+        memcached_behavior_set(memc, MEMCACHED_BEHAVIOR_BINARY_PROTOCOL, 1);
+    }
 
     return;
 }
