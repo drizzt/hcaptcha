@@ -377,8 +377,10 @@ int data_check(char *k, char *v)
         return 1;
     }    
     if (strcmp(v, v2) != 0) {
+        free(v2);
         return 1;
     }
+    free(v2);
     
     return 0;
 }
