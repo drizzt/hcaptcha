@@ -515,6 +515,7 @@ int main(int argc, char **argv)
 
     initConfig();
     loadConfig(config_file);
+    free(config_file);
     
     if (cfg.daemon == true) {
         pid_t pid = fork();
